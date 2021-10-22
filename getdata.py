@@ -32,7 +32,5 @@ def getdata(duration):
             print('Problem with status code')
 
         i = i + 1
-        
-    return longitude_data, latitude_data, program_work_time
 
-getdata(1)
+    return longitude_data, latitude_data, program_work_time
