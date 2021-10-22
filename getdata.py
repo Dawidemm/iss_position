@@ -1,12 +1,14 @@
 import requests
 import json
 import time
+from changetf import change_time_format
 
 
 def getdata(duration):
 
     longitude_data = []
     latitude_data = []
+    program_work_time = []
     i = 0
 
     while i < int(duration):
@@ -22,10 +24,15 @@ def getdata(duration):
             latitude_data.append(latitude)
             longitude_data.append(longitude)
             #print(latitude, longitude)
+            time_stamp = answer['timestamp']
+            time_stamp = change_time_format(time_stamp)
+            program_work_time.append(time_stamp)
 
         else:
             print('Problem with status code')
 
         i = i + 1
+        
+    return longitude_data, latitude_data, program_work_time
 
-    return longitude_data, latitude_data
+getdata(1)
