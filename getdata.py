@@ -8,6 +8,8 @@ import pandas as pd
 
 def getdata(duration):
     global longitude_data
+    global latitude_data
+    global program_work_time
     longitude_data = []
     latitude_data = []
     program_work_time = []
@@ -36,8 +38,3 @@ def getdata(duration):
         i = i + 1
 
     return longitude_data, latitude_data, program_work_time
-
-getdata(5)
-df1 = pd.DataFrame(longitude_data)
-df1.columns = ['longitude']
-print(df1)
