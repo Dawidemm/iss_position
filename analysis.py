@@ -20,18 +20,12 @@ def main():
 
     longitude_data_array = np.array(longitude_data)
     df1 = pd.DataFrame(longitude_data_array)
-    #df1.columns = ['longitude']
-    #print(df1)
 
     latitude_data_array = np.array(latitude_data)
     df2 = pd.DataFrame(latitude_data_array)
-    #df2.columns = ['latitude']
-    #print(df2)
 
-    program_working_time = np.array(sample_time_converted)
-    df3 = pd.DataFrame(program_working_time)
-    #df3.columns = ['date']
-    #print(df3)
+    sample_time_array = np.array(sample_time_converted)
+    df3 = pd.DataFrame(sample_time_array)
 
     df = pd.concat([df1, df2, df3], ignore_index=True, axis=1)
     df.columns = ['longitude', 'latitude', 'sample time']
