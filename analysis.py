@@ -15,7 +15,7 @@ def main():
     
     sample_time_converted = []
     for i in range(duration):
-        stc = sample_time[i].strftime('%H:%M:%S')#if you want miscrosec add ':%f'
+        stc = sample_time[i].strftime('%H:%M:%S:%f')
         sample_time_converted.append(stc)
 
     longitude_data_array = np.array(longitude_data)
