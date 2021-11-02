@@ -23,7 +23,7 @@ def main():
 
     latitude_data_array = np.array(latitude_data)
     df2 = pd.DataFrame(latitude_data_array)
-
+    
     sample_time_array = np.array(sample_time_converted)
     df3 = pd.DataFrame(sample_time_array)
 
