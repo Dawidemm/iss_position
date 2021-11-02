@@ -1,18 +1,17 @@
+from datetime import datetime
+import datetime
 import requests
 import json
 import time
 from changetf import change_time_format
-import numpy as np
-import pandas as pd
+
 
 
 def getdata(duration):
-    global longitude_data
-    global latitude_data
-    global program_work_time
+
     longitude_data = []
     latitude_data = []
-    program_work_time = []
+    sample_time_data = []
     i = 0
 
     while i < int(duration):
@@ -27,14 +26,16 @@ def getdata(duration):
             latitude = position['latitude']
             latitude_data.append(latitude)
             longitude_data.append(longitude)
-            #print(latitude, longitude)
-            time_stamp = answer['timestamp']
-            time_stamp = change_time_format(time_stamp)
-            program_work_time.append(time_stamp)
+            sample_time = datetime.datetime.now()
+            sample_time_data.append(sample_time)
 
         else:
             print('Problem with status code')
 
         i = i + 1
 
-    return longitude_data, latitude_data, program_work_time
+    return longitude_data, latitude_data, sample_time_data
+
+#the method of collecting the sample time data has been changed because,
+#by downloading this data from api, we lose information about microseconds at the time of measurement,
+#currently we get a sufficiently accurate measurement time for further work
