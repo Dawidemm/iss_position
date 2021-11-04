@@ -4,7 +4,9 @@ import getdata
 import numpy as np
 import pandas as pd
 import math
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.animation import FuncAnimation
 
 
@@ -65,4 +67,17 @@ df6 = pd.DataFrame(distance_xy_array)
 
 df = pd.concat([df1, df2, df3, df4, df5, df6], ignore_index=True, axis=1)
 df.columns = ['longitude', 'latitude', 'sample time', 'distance in axis x [km]', 'distance in axis y [km]', 'distance [km]']
-print(df)
+#print(df)
+
+x_values_d3 = [float(x) for x in longitude_data_array]
+y_values_d3 = [float(x) for x in latitude_data_array]
+z_values_d3 = np.array([i for i, _ in enumerate(latitude_data)])
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+fig.set_size_inches(11, 11, forward=True)
+ax.plot3D(x_values_d3, y_values_d3, z_values_d3,edgecolor='lightgreen')
+ax.scatter(x_values_d3, y_values_d3, z_values_d3, '.r')
+plt.style.use('ggplot')
+plt.show()
+
