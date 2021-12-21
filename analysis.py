@@ -43,7 +43,7 @@ distance_xy = [NaN]
 i = 1
 while i < duration:
     distance_xyi = math.sqrt(distance_x[i]**2 + distance_y[i]**2)
-    distance_xy.append(distance_xyi)
+    distance_xy.append(round(distance_xyi,3))
     i = i + 1
 
 df1 = pd.DataFrame(np.array(latitude_data))
@@ -56,28 +56,45 @@ df4 = pd.DataFrame(np.array(distance_x))
 
 df5 = pd.DataFrame(np.array(distance_y))
 
-distance_xy_array = np.array(distance_xy)
 df6 = pd.DataFrame(np.array(distance_xy))
 
 df = pd.concat([df1, df2, df3, df4, df5, df6], ignore_index=True, axis=1)
 df.columns = ['Latitude', 'Longitude', 'Sample time',
  'Distance in axis x [km]', 'Distance in axis y [km]', 'Distance [km]']
-print(df)
 
 x_values_d3 = [float(x) for x in df['Latitude']]
 y_values_d3 = [float(y) for y in df['Longitude']]
 z_values_d3 = np.array([t for t, _ in enumerate(df['Sample time'])])
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-fig.set_size_inches(12, 9, forward=True)
+fig1 = plt.figure()
+ax = fig1.add_subplot(111, projection='3d')
+fig1.set_size_inches(12, 8, forward=True)
 ax.plot3D(x_values_d3, y_values_d3, z_values_d3,'g')
 ax.scatter(x_values_d3, y_values_d3, z_values_d3)
 plt.xlabel('Latitude')
 plt.ylabel('Longitude')
 plt.show()
 
+fig2 = plt.figure()
+fig2.set_size_inches(9, 7)
 plt.plot(x_values_d3, y_values_d3)
 plt.xlabel('Latitude')
 plt.ylabel('Longitude')
+plt.grid()
+plt.show()
+
+fig3 = plt.figure()
+fig3.set_size_inches(9, 7)
+plt.plot(z_values_d3, x_values_d3)
+plt.xlabel('Time [s]')
+plt.ylabel('Latitude')
+plt.grid()
+plt.show()
+
+fig4 = plt.figure()
+fig4.set_size_inches(9, 7)
+plt.plot(z_values_d3, y_values_d3)
+plt.xlabel('Time [s]')
+plt.ylabel('Longitude')
+plt.grid()
 plt.show()
