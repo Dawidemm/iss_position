@@ -23,7 +23,7 @@ def charts_2d(x, y, xlabel, ylabel):
 def linreg_plot(X, y, model):
     fig = plt.figure()
     fig.set_size_inches(9, 7)
-    plt.scatter(tuple(X), y, c='steelblue', s=50)
+    plt.scatter(X, y, c='steelblue', s=50)
     plt.plot(X, model.predict(X), color='red', lw=1)
     plt.grid(color='black', linestyle='--')
     plt.show()
@@ -104,7 +104,6 @@ def main():
 
     X = df[['Latitude']].values
     y = df[['Longitude']].values
-    print(y)
     sc_x = StandardScaler()
     sc_y = StandardScaler()
     X_std = sc_x.fit_transform(X)
