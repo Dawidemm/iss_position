@@ -27,6 +27,28 @@ def linreg_plot(X, y, model):
     plt.show()
     return None
 
+def count_distance(duration, latitude_distance, longitude_distance):
+    dist_x = [NaN]
+    dist_y = [NaN]
+    dist_xy = [NaN]
+
+    for i in range(duration-1):
+        c_dist_x = float(latitude_distance[i]) - float(latitude_distance[i+1])
+        c_dist_y = float(longitude_distance[i]) - float(longitude_distance[i+1])
+
+        if c_dist_x < 0:
+            c_dist_x = c_dist_x * (-1)
+        dist_x.append(round(c_dist_x * 120.324, 3))
+
+        if c_dist_y < 0:
+            c_dist_y = c_dist_y * (-1)
+        dist_y.append(round(c_dist_y * 120.324, 3))
+
+    for i in range(1, duration):
+        c_dist_xy = math.sqrt(dist_x[i]**2 + dist_y[i]**2)
+        dist_xy.append(round(c_dist_xy, 3))
+
+    return dist_x, dist_y, dist_xy
 
 def main():
 
