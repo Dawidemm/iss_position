@@ -45,7 +45,7 @@ def count_distance(duration, latitude_distance, longitude_distance):
             c_dist_y = c_dist_y * (-1)
         dist_y.append(round(c_dist_y * 120.324, 3))
 
-    for i in range(1, duration):
+    for i in range(1,duration):
         c_dist_xy = math.sqrt(dist_x[i]**2 + dist_y[i]**2)
         dist_xy.append(round(c_dist_xy, 3))
 
@@ -66,42 +66,17 @@ def main():
         stc = sample_time[i].strftime('%H:%M:%S:%f')
         sample_time_converted.append(stc)
 
-    distance_x = [NaN]
-    i = 0
-    while i+1 < duration:
-        distance_xi = float(latitude_data[i]) - float(latitude_data[i+1])
-        if distance_xi < 0:
-            distance_xi = distance_xi*(-1)
-        distance_x.append(round(distance_xi*120.324, 3))
-        i = i + 1
-
-    distance_y = [NaN]
-    i = 0
-    while i+1 < duration:
-        distance_yi = float(longitude_data[i]) - float(longitude_data[i+1])
-        if distance_yi < 0:
-                distance_yi = distance_yi*(-1)
-        distance_y.append(round(distance_yi*120.324, 3))
-        i = i + 1
-
-    distance_xy = [NaN]
-    i = 1
-    while i < duration:
-        distance_xyi = math.sqrt(distance_x[i]**2 + distance_y[i]**2)
-        distance_xy.append(round(distance_xyi,3))
-        i = i + 1
-
     df1 = pd.DataFrame(np.array(latitude_data))
 
     df2 = pd.DataFrame(np.array(longitude_data))
         
     df3 = pd.DataFrame(np.array(sample_time_converted))
 
-    df4 = pd.DataFrame(np.array(distance_x))
+    df4 = pd.DataFrame(np.array(count_distance(duration,latitude_data,longitude_data)[0]))
 
-    df5 = pd.DataFrame(np.array(distance_y))
+    df5 = pd.DataFrame(np.array(count_distance(duration,latitude_data,longitude_data)[1]))
 
-    df6 = pd.DataFrame(np.array(distance_xy))
+    df6 = pd.DataFrame(np.array(count_distance(duration,latitude_data,longitude_data)[2]))
 
     df = pd.concat([df1, df2, df3, df4, df5, df6], ignore_index=True, axis=1)
     df.columns = ['Latitude', 'Longitude', 'Sample time',
@@ -109,7 +84,7 @@ def main():
     latitude_values = [float(x) for x in df['Latitude']]
     longitude_values = [float(y) for y in df['Longitude']]
     time_seconds = np.array([t for t, _ in enumerate(df['Sample time'])])
-
+    
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     fig.set_size_inches(12, 8, forward=True)
