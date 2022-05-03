@@ -6,7 +6,7 @@ class LinearRegression:
         self.eta = eta
         self.iterations = iteratios
 
-    def fit2(self, X, y):
+    def fit(self, X, y):
         self.w_ = np.zeros(1+X.shape[1])
         self.cost_ = []
 
