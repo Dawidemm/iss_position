@@ -1,4 +1,3 @@
-from logging import setLogRecordFactory
 from numpy.core.numeric import NaN
 from getdata import getdata
 import getdata
